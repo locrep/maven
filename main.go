@@ -1,10 +1,13 @@
 package main
 
 import (
-	"github.com/locrep/locrep-go/person"
+	"github.com/locrep/locrep-go/config"
+	"github.com/locrep/locrep-go/server"
 )
 
 func main() {
-	user := person.NewPerson()
-	user.String(24)
+	conf := config.Config()
+	port := conf.Environment.Port()
+
+	server.NewServer(conf).Run(":" + port)
 }
