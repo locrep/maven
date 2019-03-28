@@ -21,6 +21,8 @@ github.com/mattn/go-isatty
 github.com/modern-go/concurrent
 # github.com/modern-go/reflect2 v1.0.1
 github.com/modern-go/reflect2
+# github.com/moul/http2curl v1.0.0
+github.com/moul/http2curl
 # github.com/onsi/ginkgo v1.8.0
 github.com/onsi/ginkgo
 github.com/onsi/ginkgo/config
@@ -53,9 +55,14 @@ github.com/onsi/gomega/matchers/support/goraph/bipartitegraph
 github.com/onsi/gomega/matchers/support/goraph/edge
 github.com/onsi/gomega/matchers/support/goraph/node
 github.com/onsi/gomega/matchers/support/goraph/util
+# github.com/parnurzeal/gorequest v0.2.15
+github.com/parnurzeal/gorequest
+# github.com/pkg/errors v0.8.1
+github.com/pkg/errors
 # github.com/ugorji/go/codec v0.0.0-20190309163734-c4a1c341dc93
 github.com/ugorji/go/codec
 # golang.org/x/net v0.0.0-20180906233101-161cd47e91fd
+golang.org/x/net/publicsuffix
 golang.org/x/net/html/charset
 golang.org/x/net/html
 golang.org/x/net/html/atom

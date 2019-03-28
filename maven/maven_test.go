@@ -27,7 +27,7 @@ var _ = Describe("when doing maven install", func() {
 		testServer = httptest.NewServer(server.NewServer(conf))
 		recorder = httptest.NewRecorder()
 
-		cmd := exec.Command("mvn", "package", "-Dmaven.repo.remote=http://localhost:8888")
+		cmd := exec.Command("mvn", "package", "-Dmaven.repo.remote=http://localhost:"+conf.Environment.Port())
 		cmd.Dir = "dummy-repo/"
 
 		result, err := cmd.Output()
@@ -41,7 +41,7 @@ var _ = Describe("when doing maven install", func() {
 
 	It("should return hello world", func() {
 		greeting, err := ioutil.ReadAll(recorder.Result().Body)
-		Expect(string(greeting)).Should(Equal("hello-world"))
+		Expect(string(greeting)).Should(Equal("Hello world"))
 		Expect(err).Should(BeNil())
 	})
 

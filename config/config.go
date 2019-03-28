@@ -1,9 +1,17 @@
 package config
 
-import "os"
+import (
+	"gopkg.in/yaml.v2"
+	"io/ioutil"
+	"log"
+	"os"
+)
+
+const MAVEN_REPOS_YAML string = "./config/maven_repos.yaml"
 
 type Conf struct {
 	Environment env
+	MavenRepos  []string
 }
 
 type env struct {
@@ -21,7 +29,18 @@ func Config() Conf {
 		},
 	}
 
+	mvnRepos := make([]string, 0)
+	mavenReposYml, err := ioutil.ReadFile(MAVEN_REPOS_YAML)
+	if err != nil {
+		log.Printf("Reading "+MAVEN_REPOS_YAML+" failed: #%v ", err)
+	}
+	err = yaml.Unmarshal(mavenReposYml, &mvnRepos)
+	if err != nil {
+		log.Fatalf("Unmarshalling "+MAVEN_REPOS_YAML+" failed: #%v ", err)
+	}
+
 	return Conf{
 		Environment: environment,
+		MavenRepos:  mvnRepos,
 	}
 }
