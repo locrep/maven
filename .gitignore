@@ -1,4 +1,7 @@
 vendor/
 .idea
+
 locrep-go.exe
+*.exe
+maven-repo
 
