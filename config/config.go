@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-const MAVEN_REPOS_YAML string = "./config/maven_repos.yaml"
+const MavenReposYaml string = "./config/maven_repos.yaml"
 
 type Conf struct {
 	Environment env
@@ -30,13 +30,13 @@ func Config() Conf {
 	}
 
 	mvnRepos := make([]string, 0)
-	mavenReposYml, err := ioutil.ReadFile(MAVEN_REPOS_YAML)
+	mavenReposYml, err := ioutil.ReadFile(MavenReposYaml)
 	if err != nil {
-		log.Printf("Reading "+MAVEN_REPOS_YAML+" failed: #%v ", err)
+		log.Printf("Reading "+MavenReposYaml+" failed: #%v ", err)
 	}
 	err = yaml.Unmarshal(mavenReposYml, &mvnRepos)
 	if err != nil {
-		log.Fatalf("Unmarshalling "+MAVEN_REPOS_YAML+" failed: #%v ", err)
+		log.Fatalf("Unmarshalling "+MavenReposYaml+" failed: #%v ", err)
 	}
 
 	return Conf{
