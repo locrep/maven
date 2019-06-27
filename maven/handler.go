@@ -2,7 +2,7 @@ package maven
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/locrep/locrep-go/config"
+	"github.com/locrep/go/config"
 	"github.com/parnurzeal/gorequest"
 	"net/http"
 	"os"
