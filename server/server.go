@@ -18,6 +18,8 @@ func NewServer(config config.Conf) *gin.Engine {
 	gin.SetMode(config.Environment.BuildMode())
 
 	server := gin.New()
+
+	server.Use(gin.Logger())
 	server.Use(mavenMiddleware(config))
 
 	return server

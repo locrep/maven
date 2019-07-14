@@ -1,16 +1,16 @@
 package maven_test
 
 import (
-	"github.com/locrep/locrep-go/config"
-	"github.com/locrep/locrep-go/server"
-	. "github.com/locrep/locrep-go/utils"
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"os/exec"
+
+	"github.com/locrep/go/config"
+	"github.com/locrep/go/server"
+	. "github.com/locrep/go/utils"
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
 )
 
 var _ = Describe("when doing maven install", func() {
@@ -37,12 +37,6 @@ var _ = Describe("when doing maven install", func() {
 
 	It("should return 200 status ok", func() {
 		Expect(recorder.Result().StatusCode).Should(Equal(http.StatusOK))
-	})
-
-	It("should return hello world", func() {
-		greeting, err := ioutil.ReadAll(recorder.Result().Body)
-		Expect(string(greeting)).Should(Equal("Hello world"))
-		Expect(err).Should(BeNil())
 	})
 
 	AfterAll(func() {

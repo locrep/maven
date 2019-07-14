@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-if [[ "$1" == "image" ]]; then
+if [ "$1" = "image" ]
+then
     docker build -t locrep .
 else
     #run all tests
