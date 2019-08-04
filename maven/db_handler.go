@@ -1,17 +1,32 @@
 package maven
 
+import (
+	"database/sql"
+	"fmt"
 
-/*
- * Database handler
- *
- * This will be changed and updated drastically through out the development stage
- *
- * func saveArtifactRecord(artif *Artifact) bool
- *   This function should save the given artifact to database.
- *
- * func deleteArtifactRecord(artif *Artifact) bool
- *   This function should delete the given artifact from database.
- *
- * func checkArtifactRecord(artif *Artifact) bool
- *   This function should check if the given artifact exists on the database.
- */
+	_ "github.com/go-sql-driver/mysql"
+)
+
+var pool *sql.DB // Database connection pool.
+
+func connect() {
+	// Open up our database connection.
+	pool, err := sql.Open("mysql", "root:******@tcp(172.17.0.2:3306)/locrep")
+
+	// if there is an error opening the connection, handle it
+	if err != nil {
+		fmt.Println("hata aldi")
+		panic(err.Error())
+	}
+	// defer the close till after the main function has finished
+	// executing
+	defer pool.Close()
+
+	res, _ := pool.Query("SHOW TABLES")
+	var table string
+
+	for res.Next() {
+		res.Scan(&table)
+		fmt.Println(table)
+	}
+}
