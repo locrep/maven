@@ -1,9 +1,8 @@
 package maven
 
 import (
-	"errors"
 	"log"
-	"strings"
+	"regexp"
 
 	"github.com/gin-gonic/gin"
 	"github.com/locrep/go/config"
@@ -17,28 +16,39 @@ type handler struct {
 
 func UrlResolve(param string) (*ArtifactRequest, error) {
 	// TODO: Optimize the function (use variables for indexes, dont recalculate)
-	var slashLastIndex = strings.LastIndex(param, "/")
-	if slashLastIndex == -1 {
-		return nil, errors.New("slashIndex failed")
-	}
-	var fileName = param[slashLastIndex+1:]
-	var dashIndex = strings.LastIndex(fileName, "-")
-	if dashIndex == -1 {
-		return nil, errors.New("dashIndex failed")
-	}
-	var dotIndex = strings.LastIndex(fileName, ".")
-	if dotIndex == -1 {
-		return nil, errors.New("dotIndex failed")
-	}
-	var trimmed = param[:slashLastIndex]
-	trimmed = trimmed[:strings.LastIndex(trimmed, fileName[dashIndex+1:dotIndex])]
-	var grid = trimmed[:strings.LastIndex(trimmed, fileName[:dashIndex])-1]
+	// var slashLastIndex = strings.LastIndex(param, "/")
+	// if slashLastIndex == -1 {
+	// 	return nil, errors.New("slashIndex failed")
+	// }
+	// var fileName = param[slashLastIndex+1:]
+	// var dashIndex = strings.LastIndex(fileName, "-")
+	// if dashIndex == -1 {
+	// 	return nil, errors.New("dashIndex failed")
+	// }
+	// var dotIndex = strings.LastIndex(fileName, ".")
+	// if dotIndex == -1 {
+	// 	return nil, errors.New("dotIndex failed")
+	// }
+	// var trimmed = param[:slashLastIndex]
+	// trimmed = trimmed[:strings.LastIndex(trimmed, fileName[dashIndex+1:dotIndex])]
+	// var grid = trimmed[:strings.LastIndex(trimmed, fileName[:dashIndex])-1]
+	// res := new(ArtifactRequest)
+	// res.Artifact = new(Artifact)
+	// res.Artifact.Version = fileName[dashIndex+1 : dotIndex]
+	// res.Artifact.ArtifactID = fileName[:dashIndex]
+	// res.Artifact.GroupID = grid
+	// res.File = fileName
+
+	r, _ := regexp.Compile(`([A-z0-9-_/.]+)\/([A-z0-9-_.]+)\/([0-9.]+[A-z0-9-_.]*)\/([A-z0-9-_.]+)`)
+	match := r.FindStringSubmatch(param)
+
 	res := new(ArtifactRequest)
 	res.Artifact = new(Artifact)
-	res.Artifact.Version = fileName[dashIndex+1 : dotIndex]
-	res.Artifact.ArtifactID = fileName[:dashIndex]
-	res.Artifact.GroupID = grid
-	res.File = fileName
+	res.Artifact.Version = match[3]
+	res.Artifact.ArtifactID = match[2]
+	res.Artifact.GroupID = match[1]
+	res.File = match[4]
+
 	return res, nil
 }
 
