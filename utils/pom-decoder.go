@@ -10,7 +10,7 @@ import (
 type Project struct {
 	XMLName xml.Name   `xml:"project"`
 	Project []Licenses `xml:"licenses"`
-	//	Project  		[]Organization  `xml:"organization"`
+	Organization string   `xml:"organization"`
 	ModelVersion string `xml:"modelVersion"`
 	GroupId      string `xml:"groupId"`
 	ArtifactId   string `xml:"artifactId"`
@@ -31,14 +31,6 @@ type License struct {
 	Url          string   `xml:"url"`
 	Distribution string   `xml:"distribution"`
 }
-
-//type Organization struct {
-//
-//	XMLName 		xml.Name	`xml:"organization"`
-//	Name   			string		`xml:"name"`
-//	Url   			string		`xml:"url"`
-//
-//						}
 
 func main() {
 
@@ -68,10 +60,9 @@ func main() {
 		fmt.Println("project groupId =" + project.GroupId)
 		fmt.Println("project artifactId = " + project.ArtifactId)
 		fmt.Println("project Version =" + project.Version)
-		//	fmt.Println("project organization =" + project.Project[i].Organization.Name)
+		fmt.Println("Organization =" + project.Organization)
 		fmt.Println("license " + project.Project[i].License.Name)
 		fmt.Println("project description =" + project.Description)
 		fmt.Println("project url =" + project.Url)
 	}
-
 }
