@@ -55,11 +55,11 @@ func connect() {
 	// executing
 	defer pool.Close()
 
-	res, _ := pool.Query("SHOW TABLES")
-	var table string
+	// res, _ := pool.Query("SHOW TABLES")
+	// var table string
 
-	for res.Next() {
-		res.Scan(&table)
-		fmt.Println(table)
-	}
+	// for res.Next() {
+	//	res.Scan(&table)
+	//	fmt.Println(table)
+	//}
 }
