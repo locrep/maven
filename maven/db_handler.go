@@ -61,5 +61,5 @@ func connect() {
 	// for res.Next() {
 	//	res.Scan(&table)
 	//	fmt.Println(table)
-	//}
+	// }
 }
