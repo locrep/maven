@@ -30,6 +30,8 @@ func insertArtifact(groupID string, artifactID string, version string) (bool, in
 	 * It should check if the artifact is already saved with artifactSaved(). If saved it should return the row id returned by artifactSaved()
 	 * If any error occurs the first return should be false.
 	 */
+	sqlStatement := "insert into maven_artifacts (version,groupID,artifactID) VALUES ($1,$2,$3)"
+	res, _ := pool.Query(sqlStatement, version, groupID, artifactID)
 }
 
 func insertFile(groupID string, artifactID string, version string, filename string) {
@@ -40,6 +42,11 @@ func insertFile(groupID string, artifactID string, version string, filename stri
 	 * success, artRowId := insertArtifact(...)
 	 * fsuccess := insertArtifactFile(artRowId, ...)
 	 */
+	connect()
+
+	succes, artRowId := insertArtifact(groupID, artifactID, version)
+	res, _ := pool.Query("insert into maven_artifacts ")
+
 }
 
 func connect() {
@@ -62,4 +69,5 @@ func connect() {
 	//	res.Scan(&table)
 	//	fmt.Println(table)
 	// }
+
 }
