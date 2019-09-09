@@ -7,5 +7,5 @@ else
     #run all tests
     PORT=8888 BUILD_MODE=debug ginkgo -v -r
 
-    go build
+    go build -o "locrep-maven"
 fi

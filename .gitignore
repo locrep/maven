@@ -3,5 +3,10 @@ vendor/
 
 locrep-go.exe
 *.exe
+locrep-maven
 maven-repo
+
+maven/dummy-repo/.classpath
+maven/dummy-repo/.project
+maven/dummy-repo/.settings/
 

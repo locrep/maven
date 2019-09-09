@@ -6,9 +6,9 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/locrep/go/config"
-	"github.com/locrep/go/server"
-	. "github.com/locrep/go/utils"
+	"github.com/locrep/maven/config"
+	"github.com/locrep/maven/server"
+	. "github.com/locrep/maven/utils"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

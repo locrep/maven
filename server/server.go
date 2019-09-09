@@ -2,8 +2,8 @@ package server
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/locrep/go/config"
-	"github.com/locrep/go/maven"
+	"github.com/locrep/maven/config"
+	"github.com/locrep/maven/maven"
 )
 
 func mavenMiddleware(config config.Conf) func(ctx *gin.Context) {

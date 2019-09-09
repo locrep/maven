@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/locrep/go/config"
-	"github.com/locrep/go/server"
+	"github.com/locrep/maven/config"
+	"github.com/locrep/maven/server"
 )
 
 func main() {
