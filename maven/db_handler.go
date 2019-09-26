@@ -43,13 +43,18 @@ func insertArtifact(groupID string, artifactID string, version string) (bool, in
 	 */
 
 	sqlStatement := "insert into maven_artifacts (version,groupID,artifactID) VALUES ($1,$2,$3)"
+	idSelectStatement := "select artRowID from maven_artifact where (version,groupID,artifactID) VALUES ($1,$2,$3)"
 	res, err := pool.Exec(sqlStatement, version, groupID, artifactID)
 	if err != nil {
-		succes, artRowId := artifactSaved(groupID, artifactID, version)
 		return false, 0
 	} else {
-		id, err := res.LastInsertId()
-		return true, id
+		success, artRowId := artifactSaved(groupID, artifactID, version)
+		if !success {
+			return false, 0
+		}
+		//id, err := res.LastInsertId()  //bunu select ile getir
+		artRowId , err := pool.Exec(idSelectStatement, version, groupID, artifactID)
+		return true, artRowId
 	}
 }
 
@@ -75,9 +80,9 @@ func insertFile(groupID string, artifactID string, version string, filename stri
 
 	var isFileSaved bool
 
-	isFileSaved = isFileSaved(fileName, artRowId)
+	isFileSaved = isFileSaved(fileName, artRowId) //select yapan fonksiyon dosya tablosundan
 	if !isFileSaved {
-		isFileSaved = insertArtifactFile(artRowId, filename, checksum)
+		isFileSaved = insertArtifactFile(artRowId, filename, checksum) //dosya tablosuna insert
 		if !isFileSaved {
 			return false
 		}
@@ -97,7 +102,7 @@ func connect() {
 		panic(err.Error())
 	}
 	// defer the close till after the main function has finished
-	// executing
+	// executingg
 	defer pool.Close()
 
 	// res, _ := pool.Query("SHOW TABLES")
