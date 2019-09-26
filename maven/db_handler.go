@@ -15,6 +15,8 @@ func insertArtifactFile(artRowID int64, filename string, checksum string) bool {
 	 * And then we can associate the artifacts table and files table by the artifacts row id(artRowId) eg. 12
 	 * If any error occurs the return should be false.
 	 */
+	sqlStatement := "insert into maven_artifact_file (artRowID,filename,checksum) VALUES ($1,$2,$3)"
+	res, err := pool.Exec(sqlStatement, artRowID, filename, checksum)
 }
 
 func artifactSaved(groupID string, artifactID string, version string) (bool, int) {
@@ -53,7 +55,7 @@ func insertArtifact(groupID string, artifactID string, version string) (bool, in
 			return false, 0
 		}
 		//id, err := res.LastInsertId()  //bunu select ile getir
-		artRowId , err := pool.Exec(idSelectStatement, version, groupID, artifactID)
+		artRowId, err := pool.Exec(idSelectStatement, version, groupID, artifactID)
 		return true, artRowId
 	}
 }
